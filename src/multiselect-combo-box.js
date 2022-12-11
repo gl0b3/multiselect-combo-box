@@ -340,9 +340,9 @@ import './multiselect-combo-box-input.js';
 
       if (!selectedItem) {
         this.$.comboBox.value = null;
+      } else {
+        this.selectedItems = update;
       }
-
-      this.selectedItems = update;
 
       if (this.validate()) {
         this._dispatchChangeEvent();
