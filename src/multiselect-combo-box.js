@@ -139,7 +139,6 @@ import './multiselect-combo-box-input.js';
       super.ready();
 
       // replace listener to modify default behavior
-      // console.log(this.$.input);
       this.$.comboBox.$.overlay.removeEventListener('selection-changed', this.$.comboBox._boundOverlaySelectedItemChanged);
       this.$.comboBox.$.overlay.addEventListener('selection-changed', this._boundCustomOverlaySelectedItemChanged);
       this.$.input.addEventListener('focusout', this._boundFocusOut);
@@ -328,7 +327,6 @@ import './multiselect-combo-box-input.js';
     }
 
     _comboBoxValueChanged(event, selectedItem) {
-      console.log('')
       const item = selectedItem || this.$.comboBox.selectedItem;
       if (!item) {
         return;
@@ -353,7 +351,7 @@ import './multiselect-combo-box-input.js';
       }
 
       this.$.input.value = null;
-      
+
       // reset the focus index, so a value-change event
       // is not fired when the overlay is closed
       this.$.comboBox._focusedIndex = -1;
@@ -389,23 +387,19 @@ import './multiselect-combo-box-input.js';
     }
 
     _findIndex(item, selectedItems, itemIdPath) {
-      // console.log('item: ' + item + ', selectedItems: ' + selectedItems + ', itemIdPath: ' + itemIdPath);
       if (itemIdPath && item) {
         for (let index = 0; index < selectedItems.length; index++) {
           if (selectedItems[index] && selectedItems[index][itemIdPath] === item[itemIdPath]) {
             return index;
           }
         }
-        // console.log('return -1');
         return -1;
       } else {
-        // console.log('selectedItems.indexOf(' + item + '): ' + selectedItems.indexOf(item));
         return selectedItems.indexOf(item);
       }
     }
 
     _handleItemRemoved(event) {
-      console.log(Object.assign(event, CustomEvent).type);
       const item = event.detail.item;
       const update = this.selectedItems.slice(0);
       update.splice(update.indexOf(item), 1);
@@ -464,7 +458,6 @@ import './multiselect-combo-box-input.js';
     }
 
     _customOverlaySelectedItemChanged(event) {
-      console.log('_customOverlaySelectedItemChanged');
       event.stopPropagation();
 
       if (event.detail.item instanceof ComboBoxPlaceholder) {
